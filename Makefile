@@ -1,27 +1,34 @@
-APP_NAME = game
-LIB_NAME = lib
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall
 
-
-CFLAGS = -Wall
-CC = g++
-
+SRC_APP_DIR = src/app
+SRC_APP_LIB_DIR = src/app_lib
+TESTS_DIR = tests
 BIN_DIR = bin
-OBJ_DIR = obj
-SRC_DIR = src
 
-APP_PATH = $(BIN_DIR)/$(APP_NAME)
+SRC_APP_FILES = $(wildcard $(SRC_APP_DIR)/*.cpp)
+SRC_APP_LIB_FILES = $(wildcard $(SRC_APP_LIB_DIR)/*.cpp)
+TESTS_FILES = $(wildcard $(TESTS_DIR)/*.cpp)
 
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
-OBJECTS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SOURCES))
+APP_TARGET = $(BIN_DIR)/main
+TESTS_TARGET = $(BIN_DIR)/tests
 
+all: create_bin_dir $(APP_TARGET) $(TESTS_TARGET)
 
-$(APP_PATH): $(OBJECTS)
-	$(CC) $(CFLAGS) $^ -o $@
+create_bin_dir:
+	mkdir -p $(BIN_DIR)
 
+$(APP_TARGET): $(SRC_APP_FILES) $(SRC_APP_LIB_FILES)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	mkdir -p $(OBJ_DIR)
-	$(CC) -c $< -o $@
+$(TESTS_TARGET): $(SRC_APP_LIB_FILES) $(TESTS_FILES)
+	$(CXX) $(CXXFLAGS) $^ -o $@ 
+
+run_app: $(APP_TARGET)
+	./$(APP_TARGET)
+
+run_tests: $(TESTS_TARGET)
+	./$(TESTS_TARGET)
 
 clean:
-	$(RM) $(APP_PATH) $(OBJ_DIR)/*.o
+	rm -rf $(BIN_DIR)
