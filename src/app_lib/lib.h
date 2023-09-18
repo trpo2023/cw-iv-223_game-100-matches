@@ -16,4 +16,3 @@ int countMatchesOnTable();
 bool takeMatches();
 
 #endif // LIB_H
-
