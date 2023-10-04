@@ -45,4 +45,3 @@ run_tests: $(BIN_DIR)/tests
 
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
-
