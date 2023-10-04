@@ -1,7 +1,7 @@
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
 #include "lib.h"
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 
 using namespace std;
 
@@ -10,7 +10,8 @@ int Player;
 int count;
 int num;
 
-void initGame() {
+void initGame()
+{
     srand(time(0));
     Player = 1;
     count = 100;
@@ -18,12 +19,14 @@ void initGame() {
     Correct = false;
 }
 
-void startGame() {
+void startGame()
+{
     initGame();
     do {
         if (Player == 1) {
             do {
-                cout << "\nYour move. There are " << count << " matches on the table." << endl;
+                cout << "\nYour move. There are " << count
+                     << " matches on the table." << endl;
                 cout << "How many matches will you take?\n" << endl;
                 cin >> num;
                 if (num >= 1 && num < 10 && num <= count)
@@ -53,22 +56,27 @@ void startGame() {
     cout << "Game ended!\n";
 }
 
-void showCreators() {
+void showCreators()
+{
     cout << "Game creators:\n"
          << "Anastasia Syryamina IV-223\n"
          << "Ilya Parshaev IV-223\n";
 }
 
-void showRules() {
+void showRules()
+{
     cout << "Game rules:\n"
-         << "From the pile, players take turns taking from 1 to 9 matches, the player who takes the last match wins.\n";
+         << "From the pile, players take turns taking from 1 to 9 matches, the "
+            "player who takes the last match wins.\n";
 }
 
-int countMatchesOnTable() {
+int countMatchesOnTable()
+{
     return count;
 }
 
-bool takeMatches() {
+bool takeMatches()
+{
     // Проверка на правильное количество спичек для взятия (от 1 до 9)
     if (num < 1 || num > 9 || num > count) {
         return false; // Ход был некорректным
@@ -82,4 +90,3 @@ bool takeMatches() {
 
     return true; // Ход был успешным
 }
-
