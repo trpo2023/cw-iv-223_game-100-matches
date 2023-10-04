@@ -40,15 +40,15 @@ union ctest_run_func_union {
     ctest_unary_run_func unary;
 };
 
-#define CTEST_IMPL_PRAGMA(x) _Pragma(#x)
+/* #define CTEST_IMPL_PRAGMA(x) _Pragma(#x) */
 
 #if defined(__GNUC__)
 #if defined(__clang__) || __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
 /* the GCC argument will work for both gcc and clang  */
 #define CTEST_IMPL_DIAG_PUSH_IGNORED(w)    \
     CTEST_IMPL_PRAGMA(GCC diagnostic push) \
-    CTEST_IMPL_PRAGMA(GCC diagnostic ignored "-W" #w)
-#define CTEST_IMPL_DIAG_POP() CTEST_IMPL_PRAGMA(GCC diagnostic pop)
+/*    CTEST_IMPL_PRAGMA(GCC diagnostic ignored "-W" #w) */
+/* #define CTEST_IMPL_DIAG_POP() CTEST_IMPL_PRAGMA(GCC diagnostic pop)*/
 #else
 /* the push/pop functionality wasn't in gcc until 4.6, fallback to "ignored"  */
 #define CTEST_IMPL_DIAG_PUSH_IGNORED(w) \
@@ -289,6 +289,11 @@ void assert_compare_u(
 #define ASSERT_NOT_EQUAL_U(exp, real) \
     assert_compare_u("!=", exp, real, __FILE__, __LINE__)
 
+#define ASSERT_LT_U(v1, v2) assert_compare_u("<", v1, v2, __FILE__, __LINE__)
+#define ASSERT_LE_U(v1, v2) assert_compare_u("<=", v1, v2, __FILE__, __LINE__)
+#define ASSERT_GT_U(v1, v2) assert_compare_u(">", v1, v2, __FILE__, __LINE__)
+#define ASSERT_GE_U(v1, v2) assert_compare_u(">=", v1, v2, __FILE__, __LINE__)
+
 void assert_interval(
         intmax_t exp1,
         intmax_t exp2,
@@ -443,7 +448,7 @@ void CTEST_LOG(const char* fmt, ...)
     msg_end();
 }
 
-CTEST_IMPL_DIAG_PUSH_IGNORED(missing - noreturn)
+/* CTEST_IMPL_DIAG_PUSH_IGNORED(missing - noreturn) */
 
 void CTEST_ERR(const char* fmt, ...)
 {
@@ -458,7 +463,7 @@ void CTEST_ERR(const char* fmt, ...)
     longjmp(ctest_err, 1);
 }
 
-CTEST_IMPL_DIAG_POP()
+/* CTEST_IMPL_DIAG_POP() */
 
 void assert_str(
         const char* cmp,
