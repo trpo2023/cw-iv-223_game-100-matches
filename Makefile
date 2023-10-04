@@ -31,7 +31,7 @@ $(OBJ_DIR)/%.o: src/app_lib/%.cpp
 
 tests: $(TESTS_OBJECTS) $(LIB_OBJECTS)
 	mkdir -p $(BIN_DIR)
-	$(CC) $(TESTS_OBJECTS) $(LIB_OBJECTS) -o $(BIN_DIR)/tests $(SFML_LIBS)
+	$(CC) $(TESTS_OBJECTS) $(LIB_OBJECTS) -o $(BIN_DIR)/tests
 
 $(OBJ_DIR)/%.o: tests/%.cpp
 	mkdir -p $(OBJ_DIR)
