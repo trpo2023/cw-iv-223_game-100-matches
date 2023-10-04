@@ -8,7 +8,7 @@ APP_SOURCES = $(wildcard src/app/*.cpp)
 APP_OBJECTS = $(patsubst src/app/%.cpp, $(OBJ_DIR)/%.o, $(APP_SOURCES))
 
 LIB_SOURCES = $(wildcard src/app_lib/*.cpp)
-LIB_OBJECTS = $(patsubst src/app_lib/%.cpp, lib/mylib.a, $(LIB_SOURCES))
+LIB_OBJECTS = $(patsubst src/app_lib/%.cpp, $(OBJ_DIR)/%.o, $(LIB_SOURCES))
 
 TESTS_SOURCES = $(wildcard tests/*.cpp)
 TESTS_OBJECTS = $(patsubst tests/%.cpp, $(OBJ_DIR)/%.o, $(TESTS_SOURCES))
