@@ -1,5 +1,6 @@
 CC = g++
-CXXFLAGS = -std=c++11 -I../lib/thirdparty 
+CXXFLAGS = -std=c++11 -I../lib/thirdparty
+
 
 OBJ_DIR = obj
 BIN_DIR = bin
@@ -30,7 +31,7 @@ $(OBJ_DIR)/%.o: src/app_lib/%.cpp
 
 tests: $(TESTS_OBJECTS) $(LIB_OBJECTS)
 	mkdir -p $(BIN_DIR)
-	$(CC) $(TESTS_OBJECTS) $(LIB_OBJECTS) -o $(BIN_DIR)/tests 
+	$(CC) $(TESTS_OBJECTS) $(LIB_OBJECTS) -o $(BIN_DIR)/tests $(SFML_LIBS)
 
 $(OBJ_DIR)/%.o: tests/%.cpp
 	mkdir -p $(OBJ_DIR)
