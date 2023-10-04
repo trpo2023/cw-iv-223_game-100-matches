@@ -1,8 +1,7 @@
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
 #include "../app_lib/lib.h"
-
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 
 using namespace std;
 
@@ -10,8 +9,7 @@ int main()
 {
     int choice;
 
-    while (true)
-    {
+    while (true) {
         cout << "Welcome to 100 matches game!\n\n";
         cout << "1. Start\n";
         cout << "2. Creators\n";
@@ -20,14 +18,13 @@ int main()
         cout << "Enter your choice: ";
         cin >> choice;
 
-        switch (choice)
-        {
+        switch (choice) {
         case 1:
             startGame();
             break;
         case 2:
             showCreators();
-            break;  
+            break;
         case 3:
             showRules();
             break;
