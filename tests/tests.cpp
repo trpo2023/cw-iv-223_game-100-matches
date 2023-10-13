@@ -20,13 +20,39 @@ CTEST(takeMatches, invalidMove)
     ASSERT_EQUAL(result, false);
 }
 
-CTEST(takeMatches, validMove)
+CTEST(takeMatches, invalidMove_1)
 {
     initGame();
-    num = 5; // Корректное количество спичек
+    num = 10; // Некорректное количество спичек
     bool result = takeMatches();
-    ASSERT_EQUAL(result, true);
-    ASSERT_EQUAL(count, 100 - 5);
+    ASSERT_EQUAL(result, false);
+}
+
+CTEST(takeMatches, invalidMove_2)
+{
+    initGame();
+    num = -50; // Некорректное количество спичек
+    bool result = takeMatches();
+    ASSERT_EQUAL(result, false);
+}
+
+CTEST(takeMatches, invalidMove_3)
+{
+    initGame();
+    num = -3; // Некорректное количество спичек
+    bool result = takeMatches();
+    ASSERT_EQUAL(result, false);
+}
+
+CTEST(takeMatches, validMove)
+{
+    for (int i = 1; i <= 9; i++) {
+        initGame();
+        num = i; // Корректное количество спичек
+        bool result = takeMatches();
+        ASSERT_EQUAL(result, true);
+        ASSERT_EQUAL(count, 100 - i);
+    }
 }
 
 CTEST(countMatchesOnTable, initialCount)
@@ -38,11 +64,13 @@ CTEST(countMatchesOnTable, initialCount)
 
 CTEST(countMatchesOnTable, updatedCount)
 {
-    initGame();
-    num = 7;
-    takeMatches();
-    int updatedCount = countMatchesOnTable();
-    ASSERT_EQUAL(updatedCount, 100 - 7);
+    for (int i = 1; i <= 9; i++) {
+        initGame();
+        num = i;
+        takeMatches();
+        int updatedCount = countMatchesOnTable();
+        ASSERT_EQUAL(updatedCount, 100 - i);
+    }
 }
 
 CTEST(bot_move, not_last_move)
