@@ -14,5 +14,7 @@ void showCreators();
 void showRules();
 int countMatchesOnTable();
 bool takeMatches();
+int bot_hard_move(int count);
+int bot_easy_move();
 
 #endif // LIB_H

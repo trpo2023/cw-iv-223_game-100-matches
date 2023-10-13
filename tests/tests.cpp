@@ -45,6 +45,21 @@ CTEST(countMatchesOnTable, updatedCount)
     ASSERT_EQUAL(updatedCount, 100 - 7);
 }
 
+CTEST(bot_move, not_last_move)
+{
+    const int count = 95;
+    const int result = bot_easy_move();
+    ASSERT_INTERVAL(1, 10, result);
+}
+
+CTEST(bot_move, last_move)
+{
+    const int count = 8;
+    const int result = bot_hard_move(count);
+    const int expected = 8;
+    ASSERT_EQUAL(result, expected);
+}
+
 int main(int argc, const char** argv)
 {
     int result = ctest_main(argc, argv);

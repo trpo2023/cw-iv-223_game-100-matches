@@ -9,6 +9,8 @@ bool Correct;
 int Player;
 int count;
 int num;
+int bot_hard_move(int count);
+int bot_easy_move();
 
 void initGame()
 {
@@ -38,9 +40,9 @@ void startGame()
             } while (!Correct);
         } else {
             if (count <= 9) {
-                num = count;
+                num = bot_hard_move(count);
             } else {
-                num = rand() % 9 + 1;
+                num = bot_easy_move();
             }
             cout << "\nMy move. I took " << num << " matches" << endl;
         }
@@ -89,4 +91,14 @@ bool takeMatches()
     Player = (Player == 1) ? 2 : 1;
 
     return true; // Ход был успешным
+}
+
+int bot_hard_move(int count)
+{
+    return count;
+}
+
+int bot_easy_move()
+{
+    return rand() % 9 + 1;
 }
